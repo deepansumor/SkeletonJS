@@ -1,44 +1,53 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require("path");
+const webpack = require("webpack");
 
-module.exports = {
-  entry: './src/skeleton.ts',
+// Common Configuration for SkeletonJS
+const commonConfig = {
+  entry: path.resolve(__dirname, "src", "skeleton.ts"),
   output: {
-    filename: 'skeleton.js',
-    path: path.resolve(__dirname, 'dist'),
-    clean: true,
-    library: 'SkeletonJS',
-    libraryTarget: 'umd',
+    path: path.resolve(__dirname, "dist"),
+    library: "SkeletonJS",
+    libraryTarget: "umd",
     globalObject: "typeof self !== 'undefined' ? self : this",
-    libraryExport: 'default',
-  },
-  
-  resolve: {
-    extensions: ['.ts', '.js'],
+    libraryExport: "default",
   },
   module: {
     rules: [
-      // TypeScript handling
       {
         test: /\.ts$/,
-        use: 'ts-loader',
+        use: "ts-loader",
         exclude: /node_modules/,
-      },
-      // LESS handling
-      {
-        test: /\.less$/,
-        use: [
-          MiniCssExtractPlugin.loader, // Extract CSS into separate file
-          'css-loader',   // Translates CSS into CommonJS
-          'less-loader'   // Compiles LESS to CSS
-        ],
-      },
+      }
     ],
   },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'skeleton.css', // Output CSS file in dist
-    }),
-  ],
-  devtool: 'source-map',
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
 };
+
+// Development Build Configuration for SkeletonJS
+const devConfig = {
+  ...commonConfig,
+  mode: "development",
+  output: {
+    ...commonConfig.output,
+    filename: "skeleton.js",
+  },
+ 
+};
+
+// Production Build Configuration for SkeletonJS
+const prodConfig = {
+  ...commonConfig,
+  mode: "production",
+  output: {
+    ...commonConfig.output,
+    filename: "skeleton.min.js",
+  },
+  optimization: {
+    minimize: true,
+  }
+};
+
+// Export both configurations
+module.exports = [devConfig, prodConfig];
