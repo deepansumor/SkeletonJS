@@ -33,6 +33,16 @@ npm install
 npm run build
 ```
 
+### LOCAL
+```html
+<script src="../dist/skeleton.min.js"></script>
+```
+
+### CDN
+```html
+<script src="https://cdn.jsdelivr.net/gh/deepansumor/SkeletonJS@latest/dist/skeleton.min.js"></script>
+```
+
 ### Usage
 
 #### Dynamic Skeleton Loader (with JS initialization)
