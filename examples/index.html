@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SkeletonJS Nested Elements Demo</title>
+
+    <!-- Load the SkeletonJS script (synchronously in this example for guaranteed global availability) -->
+    <script src="../dist/skeleton.js"></script>
+  </head>
+  <body>
+    <h1>SkeletonJS Nested Elements Demo</h1>
+
+    <!-- Dynamic Skeleton Example -->
+    <!--
+         This element will be converted into a skeleton loader.
+         It is configured with a data attribute to clone itself 10 times,
+         and inline CSS custom properties set the appearance and animation.
+    -->
+    <div
+      class="skeletonJS"
+      data-skeletons-count="10"
+      style="--skeleton-background-color: #e0e0e0; 
+             --skeleton-border-radius: 4px; 
+             --skeleton-animation-duration: 1s;
+             --skeleton-animation-type: shimmer;
+             --skeleton-animation-background: rgba(255,255,255,0.2);"
+    >
+      <h2>Title</h2>
+      <p>This is a paragraph that will be skeletonized.</p>
+      <!-- The image will be replaced by a span, hiding its content -->
+      <img
+        src="https://plus.unsplash.com/premium_photo-1681487548276-48a2c640ade9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        alt="Placeholder image"
+        style="width: 100%; height: 200px;"
+      />
+    </div>
+
+    <!-- Static Skeleton Example -->
+    <!--
+         This element uses the skeleton style but is not dynamically cloned.
+         It is useful when you just need to show the loader without duplication.
+         No Need for JS init
+    -->
+    <div
+      class="skeletonJS"
+      style="--skeleton-background-color: #e0e0e0; 
+             --skeleton-border-radius: 4px;"
+    >
+      <h2>Title</h2>
+      <p>This is a paragraph that will be skeletonized.</p>
+      <div style="width: 100px; height: 100px;"></div>
+    </div>
+
+    <!-- Initialize SkeletonJS on all elements with the .skeletonJS class -->
+    <script>
+      // This will find all elements with the class "skeletonJS" and convert them to skeleton loaders.
+      SkeletonJS.init(document.querySelectorAll(".skeletonJS"));
+    </script>
+  </body>
+</html>
